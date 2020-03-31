@@ -15,6 +15,11 @@ textarea{
     padding: 10px;
     font-size: 24px;
 }
+textarea:focus{
+   box-shadow: 0 0 10px rgba(255, 218, 185);
+   border: 1px solid rgba(255, 218, 185);
+   
+}
 .keyboard{
     border: 2px solid black;
     margin :0px auto;
@@ -55,6 +60,17 @@ textarea{
 .keyboard :nth-child(4) :first-child{
     width: 100px;
 }
+.keyboard :nth-child(5) :nth-child(1){
+    width: 60px;
+}
+.keyboard :nth-child(5) :nth-child(6){
+    width: 60px;
+}
 .keyboard :nth-child(5) :nth-child(4){
-    width: 350px;
+    width: 310px;
+}
+.active{
+    border-radius: 20px;
+    background: palegreen;
+    transition: 0.25s;
 }
