@@ -77,3 +77,11 @@ textarea:focus{
     background: palegreen;
     transition: 0.25s;
 }
+.info{
+    width: 740px;
+    margin: 0px auto;
+    padding-top: 20px;
+}
+.info::before{
+    content: "Для переключения языка нажмите Ctrl+Shift L";
+}
