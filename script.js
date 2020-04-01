@@ -70,7 +70,7 @@ const OBJ_LETTERS_EN = {
   ArrowUp: '▲',
   ShiftRight: 'Shift',
   ControlLeft: 'Ctrl',
-  OSLeft: 'Win',
+  MetaLeft: 'Win',
   AltLeft: 'Alt',
   Space: '',
   AltRight: 'Alt R',
@@ -137,7 +137,7 @@ const OBJ_LETTERS_EN_BIG = {
   ArrowUp: '▲',
   ShiftRight: 'Shift',
   ControlLeft: 'Ctrl',
-  OSLeft: 'Win',
+  MetaLeft: 'Win',
   AltLeft: 'Alt',
   Space: '',
   AltRight: 'Alt R',
@@ -218,7 +218,7 @@ const OBJ_LETTERS_RU = {
   ArrowUp: '▲',
   ShiftRight: 'Shift',
   ControlLeft: 'Ctrl',
-  OSLeft: 'Win',
+  MetaLeft: 'Win',
   AltLeft: 'Alt',
   Space: '',
   AltRight: 'Alt R',
@@ -285,7 +285,7 @@ const OBJ_LETTERS_RU_BIG = {
   ArrowUp: '▲',
   ShiftRight: 'Shift',
   ControlLeft: 'Ctrl',
-  OSLeft: 'Win',
+  MetaLeft: 'Win',
   AltLeft: 'Alt',
   Space: '',
   AltRight: 'Alt R',
@@ -433,7 +433,7 @@ document.addEventListener('keydown', (event) => {
     case 'Space':
       textArea.innerText = `${`${textArea.textContent} `}`;
       break;
-    case 'Del':
+    case 'Delete':
       textArea.innerText = `${textArea.textContent}`;
       break;
     case 'CapsLock':
@@ -463,7 +463,7 @@ document.addEventListener('keydown', (event) => {
     case 'AltRight':
       textArea.innerText = `${textArea.textContent}`;
       break;
-    case 'OSLeft':
+    case 'MetaLeft':
       textArea.innerText = `${textArea.textContent}`;
       break;
     case 'Backspace':
@@ -501,13 +501,14 @@ document.addEventListener('keyup', (event) => {
             || arrLetter[i].innerText === OBJ_LETTERS_EN_BIG[event.code]
             || arrLetter[i].innerText === OBJ_LETTERS_RU[event.code]
             || arrLetter[i].innerText === OBJ_LETTERS_RU_BIG[event.code]) {
-      arrLetter[i].classList.remove('active');
+      if (arrLetter[i].innerText === 'Caps Lock' && countCaps === 1) {
+        arrLetter[i].classList.add('active');
+      } else {
+        arrLetter[i].classList.remove('active');
+      }
     }
   }
-  if (event.code === 'CapsLock') {
-    textArea.innerText = `${textArea.textContent}`;
-    letterBigSmall();
-  } else if (event.code === 'ShiftLeft') {
+  if (event.code === 'ShiftLeft') {
     textArea.innerText = `${textArea.textContent}`;
     letterBigSmall();
   } else if (event.code === 'ShiftRight') {
