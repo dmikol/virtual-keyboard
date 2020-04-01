@@ -151,14 +151,14 @@ const ARRAY_LETTERS_RU = [
   'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '§', 'Del',
   'Caps Lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter',
   'Shift L', '\\', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '/', '▲', 'Shift',
-  'Ctrl', 'Win', 'Alt', 'Space', 'Alt R', 'Ctrl R', '◄', '▼', '►',
+  'Ctrl', 'Win', 'Alt', ' ', 'Alt R', 'Ctrl R', '◄', '▼', '►',
 ];
 const ARRAY_LETTERS_RU_BIG = [
   'Ё', '!', '"', '№', '%', ':', ',', '.', ';', '(', ')', '_', '+', 'Backspace',
   'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '±', 'Del',
   'Caps Lock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter',
   'Shift L', '\\', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '?', '▲', 'Shift',
-  'Ctrl', 'Win', 'Alt', 'Space', 'Alt R', 'Ctrl R', '◄', '▼', '►',
+  'Ctrl', 'Win', 'Alt', ' ', 'Alt R', 'Ctrl R', '◄', '▼', '►',
 ];
 const OBJ_LETTERS_RU = {
   Backquote: 'ё',
@@ -297,14 +297,22 @@ const OBJ_LETTERS_RU_BIG = {
 
 let countLetter = 0;
 let countCaps = 0;
-let language = 'eng';
+let language;
+
+if (localStorage.getItem('language') != null) {
+  language = localStorage.getItem('language');
+} else {
+  language = 'eng';
+}
 
 document.addEventListener('keydown', (event) => {
   if (event.code === 'ShiftLeft' && (event.ctrlKey || event.metaKey)) {
     if (language === 'eng') {
       language = 'rus';
+      localStorage.setItem('language', 'rus');
     } else {
       language = 'eng';
+      localStorage.setItem('language', 'eng');
     }
   }
 });
@@ -349,7 +357,11 @@ for (let i = 0; i < 5; i += 1) {
     const keyboardLetter = document.createElement('div');
     keyboardLetter.classList.add('keyboard-letter');
     keyboardRow.append(keyboardLetter);
-    keyboardLetter.innerText = `${ARRAY_LETTERS_EN[countLetter]}`;
+    if (language === 'eng') {
+      keyboardLetter.innerText = `${ARRAY_LETTERS_EN[countLetter]}`;
+    } else {
+      keyboardLetter.innerText = `${ARRAY_LETTERS_RU[countLetter]}`;
+    }
     countLetter += 1;
   }
 }
